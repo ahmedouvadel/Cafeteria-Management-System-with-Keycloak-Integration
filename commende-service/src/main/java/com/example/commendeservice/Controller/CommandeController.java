@@ -47,7 +47,7 @@ public class CommandeController {
         if (commande == null) {
             return ResponseEntity.notFound().build();
         }
-        commande.setStatut(updatedCommande.getStatut()); // Mise à jour du statut.
+        commande.setStatut(updatedCommande.getStatut());
         return ResponseEntity.ok(commandeService.saveCommande(commande));
     }
 
