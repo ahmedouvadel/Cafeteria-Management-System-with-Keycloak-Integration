@@ -6,6 +6,7 @@ import com.example.employeservice.Modele.StatusType;
 import com.example.employeservice.Service.IServiceEmploye;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public class EmployeController {
     }
 
     @GetMapping("/commandes")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public ResponseEntity<List<Commande>> getAllCommandes() {
         try {
             return ResponseEntity.ok(employeService.getAllCommandes());
@@ -32,6 +34,7 @@ public class EmployeController {
     }
 
     @GetMapping("/commandes/statut/{statusType}")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public ResponseEntity<List<Commande>> getAllCommandeStatus(@PathVariable String statusType) {
         try {
             StatusType status = StatusType.valueOf(statusType.toUpperCase());
@@ -44,6 +47,7 @@ public class EmployeController {
     }
 
     @PutMapping("/commandes/{id}/statut/{status}")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public ResponseEntity<Commande> updateCommandeStatus(@PathVariable Long id, @PathVariable String status) {
         try {
             StatusType statut = StatusType.valueOf(status.toUpperCase());
@@ -56,16 +60,19 @@ public class EmployeController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public ResponseEntity<Employe> getEmployeById(@PathVariable Long id) {
         return ResponseEntity.ok(employeService.getEmployeById(id));
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public ResponseEntity<Employe> createEmploye(@RequestBody Employe employe) {
         return ResponseEntity.ok(employeService.saveEmploye(employe));
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public ResponseEntity<Void> deleteEmploye(@PathVariable Long id) {
         employeService.deleteEmploye(id);
         return ResponseEntity.noContent().build();
