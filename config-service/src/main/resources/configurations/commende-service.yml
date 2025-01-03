@@ -19,7 +19,7 @@ security:
   oauth2:
     resourceserver:
       jwt:
-        issuer-uri: http://localhost:8090/realms/Gestion-Cafiteria-ms
+        issuer-uri: http://localhost:8080/realms/Gestion-Cafiteria-ms
 
 eureka:
   instance:

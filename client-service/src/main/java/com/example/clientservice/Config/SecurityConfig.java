@@ -31,7 +31,7 @@ public class SecurityConfig {
     @Bean
     public JwtDecoder jwtDecoder() {
         // Décodeur pour valider les tokens JWT
-        return NimbusJwtDecoder.withJwkSetUri("http://localhost:8090/realms/Gestion-Cafiteria-ms/protocol/openid-connect/certs")
+        return NimbusJwtDecoder.withJwkSetUri("http://localhost:8080/realms/Gestion-Cafiteria-ms/protocol/openid-connect/certs")
                 .build();
     }
 
